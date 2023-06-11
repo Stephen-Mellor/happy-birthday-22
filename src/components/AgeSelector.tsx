@@ -2,25 +2,26 @@ import { useState } from "react";
 import { Fireworks } from "@fireworks-js/react";
 
 type AgeSelectorProps = {
-  topText?: string;
-  bottomText?: string;
+  name: string;
 };
 
 export default function AgeSelector({
-  topText = "Happy",
-  bottomText = "Birthday",
+  name,
 }: AgeSelectorProps) {
   const [isPreferringNotToSay, setIsPreferringNotToSay] =
     useState<boolean>(false);
 
+  const top = isPreferringNotToSay ? "Happy Birthday" : "Happy";
+  const bottom = isPreferringNotToSay ? name : "Birthday"
+
   return (
     <>
       <h2
-        className={`uppercase text-4xl font-bold tracking-tighter transition-colors duration-500 ${
+        className={`uppercase text-4xl font-bold tracking-tighter transition-colors duration-1000 ${
           isPreferringNotToSay ? "text-white" : "text-black"
         }`}
       >
-        {topText}
+        {top}
       </h2>
       <select
         onChange={(e) =>
@@ -41,11 +42,11 @@ export default function AgeSelector({
         <option value="prefer-not-to-say">Prefer not to say</option>
       </select>
       <h2
-        className={`uppercase text-4xl font-bold tracking-tighter transition-colors duration-500 ${
+        className={`uppercase text-4xl font-bold tracking-tighter transition-colors duration-1000 ${
           isPreferringNotToSay ? "text-white" : "text-black"
         }`}
       >
-        {bottomText}
+        {bottom}
       </h2>
       <Fireworks
         autostart={isPreferringNotToSay}
@@ -57,7 +58,9 @@ export default function AgeSelector({
           },
           acceleration: 1,
         }}
-        className={`inset-0 -z-10 ${isPreferringNotToSay ? "bg-black" : "bg-white"} fixed transition-colors duration-500`}
+        className={`inset-0 -z-10 ${
+          isPreferringNotToSay ? "bg-black" : "bg-white"
+        } fixed transition-colors duration-1000`}
       />
     </>
   );
