@@ -2,14 +2,14 @@ import { useState } from "react";
 import { Fireworks } from "@fireworks-js/react";
 
 type AgeSelectorProps = {
-	name: string;
+	name: string | undefined;
 };
 
 export default function AgeSelector({ name }: AgeSelectorProps) {
 	const [isPreferringNotToSay, setIsPreferringNotToSay] = useState<boolean>(false);
 
 	const top = isPreferringNotToSay ? "Happy Birthday" : "Happy";
-	const bottom = isPreferringNotToSay ? name : "Birthday";
+	const bottom = isPreferringNotToSay ? (name ?? "Have a great day") : "Birthday";
 
 	return (
 		<>
