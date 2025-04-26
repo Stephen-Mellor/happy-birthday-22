@@ -8,12 +8,11 @@ type AgeSelectorProps = {
 export default function AgeSelector({ name }: AgeSelectorProps) {
 	const [isPreferringNotToSay, setIsPreferringNotToSay] = useState<boolean>(false);
 
-	const top = isPreferringNotToSay ? "Happy Birthday" : "Happy";
-	const bottom = isPreferringNotToSay ? (name ?? "Have a great day") : "Birthday";
+	const [topText, bottomText] = isPreferringNotToSay ? ["Happy Birthday", name ?? "Have a great day"] : ["Happy", "Birthday"];
 
 	return (
 		<>
-			<h2 className={`uppercase text-4xl font-bold tracking-tighter transition-colors duration-1000 ${isPreferringNotToSay ? "text-white" : "text-black"}`}>{top}</h2>
+			<h2 className={`uppercase text-4xl font-bold tracking-tighter transition-colors duration-1000 ${isPreferringNotToSay ? "text-white" : "text-black"}`}>{topText}</h2>
 			<select
 				onChange={(e) => (e?.target?.value === "prefer-not-to-say") !== isPreferringNotToSay && setIsPreferringNotToSay((v) => !v)}
 				defaultValue=""
@@ -29,7 +28,7 @@ export default function AgeSelector({ name }: AgeSelectorProps) {
 				<option value="21">21</option>
 				<option value="prefer-not-to-say">Prefer not to say</option>
 			</select>
-			<h2 className={`uppercase text-4xl font-bold tracking-tighter transition-colors duration-1000 ${isPreferringNotToSay ? "text-white" : "text-black"}`}>{bottom}</h2>
+			<h2 className={`uppercase text-4xl font-bold tracking-tighter transition-colors duration-1000 ${isPreferringNotToSay ? "text-white" : "text-black"}`}>{bottomText}</h2>
 			<Fireworks
 				autostart={isPreferringNotToSay}
 				key={String(isPreferringNotToSay)}
